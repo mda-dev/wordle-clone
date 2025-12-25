@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import type { Theme, ThemeProviderProps } from "@/types/themeProvider";
+import type { Theme, ThemeProviderProps } from "@/types/theme";
 import { ThemeProviderContext } from "@/lib/contexts/theme/themeContext";
 
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  storageKey = "vite-ui-theme",
+  storageKey = "wordle-ui-theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
 
   useEffect(() => {

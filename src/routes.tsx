@@ -1,5 +1,6 @@
 import { Landing } from "@/containers/Landing";
-import type { AppRoute } from "@/types/AppRoutes";
+import type { AppRoute } from "@/types/appRoutes";
+import { GameContainer } from "@/containers/Game";
 
 export const AppRoutes: AppRoute[] = [
   {
@@ -12,6 +13,6 @@ export const AppRoutes: AppRoute[] = [
     indexRoute: false,
     path: "/game",
     displayName: "The Game",
-    component: <span>Game box here</span>,
+    component: <GameContainer />,
   },
 ] as const;
