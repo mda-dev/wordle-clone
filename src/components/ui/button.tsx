@@ -33,7 +33,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 function Button({
@@ -58,5 +58,5 @@ function Button({
     />
   );
 }
-
+// eslint-disable-next-line
 export { Button, buttonVariants };

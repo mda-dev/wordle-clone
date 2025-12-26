@@ -1,7 +1,7 @@
 import { useTheme } from "@/lib/hooks/theme";
 import { MonitorCogIcon, MoonIcon, SunIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { Theme } from "@/types/themeProvider";
+import type { Theme } from "@/types/theme";
 import type { MouseEvent } from "react";
 
 export const ThemeSwitcher = () => {
@@ -21,22 +21,19 @@ export const ThemeSwitcher = () => {
       <Button
         name="system"
         onClick={handleSwitchTheme}
-        variant={getActiveVariant("system")}
-      >
+        variant={getActiveVariant("system")}>
         <MonitorCogIcon />
       </Button>
       <Button
         name="light"
         onClick={handleSwitchTheme}
-        variant={getActiveVariant("light")}
-      >
+        variant={getActiveVariant("light")}>
         <SunIcon />
       </Button>
       <Button
         name="dark"
         onClick={handleSwitchTheme}
-        variant={getActiveVariant("dark")}
-      >
+        variant={getActiveVariant("dark")}>
         <MoonIcon />
       </Button>
     </div>
