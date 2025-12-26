@@ -6,7 +6,7 @@ interface GuessBoxProps extends VariantProps<typeof boxVariants> {
 }
 
 const boxVariants = cva(
-  "flex w-14 h-14 text-3xl font-semibold items-center justify-center rounded-lg ring-1 shadow-md",
+  "flex w-14 h-14 text-3xl uppercase font-semibold items-center justify-center rounded-lg ring-1 shadow-md",
   {
     variants: {
       variant: {

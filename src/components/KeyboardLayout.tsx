@@ -10,13 +10,17 @@ const buttonRows = [
   "E",
   "R",
   "T",
+  // ["T", "Ț"],
   "Y",
   "U",
   "I",
+  // ["I", "Î"],
   "O",
   "P",
   "A",
   "S",
+  // ["A", "Ă", "Â"],
+  // ["S", "Ș"],
   "D",
   "F",
   "G",
@@ -45,7 +49,8 @@ const specialIcons: { [key: string]: string | ReactElement } = {
 };
 
 export const KeyboardLayout = () => {
-  const { addLetterToGuess, removeLetterFromGuess, saveGuess } = useGame();
+  const { addLetterToGuess, removeLetterFromGuess, saveGuess, gameOver } =
+    useGame();
 
   useEffect(() => {
     const kbrListener = (evt: KeyboardEvent) => {
@@ -54,13 +59,13 @@ export const KeyboardLayout = () => {
 
       if (key === "Enter") {
         // submit attmpt
-        return saveGuess();
+        return !gameOver && saveGuess();
       }
       if (key === "Backspace") {
         return removeLetterFromGuess();
       }
       if (buttonRows.includes(value)) {
-        return addLetterToGuess(value);
+        return addLetterToGuess(key);
       }
     };
     document.addEventListener("keydown", kbrListener);
@@ -68,7 +73,7 @@ export const KeyboardLayout = () => {
     return () => {
       document.removeEventListener("keydown", kbrListener);
     };
-  }, [addLetterToGuess, removeLetterFromGuess, saveGuess]);
+  }, [addLetterToGuess, removeLetterFromGuess, saveGuess, gameOver]);
 
   return (
     <div className="flex flex-wrap mx-auto gap-2 w-[435px] justify-center">
@@ -77,7 +82,7 @@ export const KeyboardLayout = () => {
         const size = isSpecial ? "default" : "icon";
         const content = specialIcons[key] || key;
         const variant = isSpecial ? "default" : "secondary";
-        const className = cn({
+        const className = cn("uppercase", {
           "flex-grow": isSpecial,
         });
         return (

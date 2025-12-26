@@ -1,7 +1,9 @@
 import type { Guess, GuessResult } from "@/types/game";
 import { GuessBox } from "./GuessBox";
 
-const emptyData = Array(5).fill("");
+const { VITE_WORD_SIZE } = import.meta.env;
+
+const emptyData = Array(Number(VITE_WORD_SIZE)).fill("");
 
 interface GuessRowPropTypes {
   guessData?: Guess | GuessResult;

@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import type { Theme, ThemeProviderProps } from "@/types/theme";
 import { ThemeProviderContext } from "@/lib/contexts/theme/themeContext";
+import STORAGE from "@/lib/storage";
 
-export function ThemeProvider({
-  children,
-  defaultTheme = "system",
-  storageKey = "wordle-ui-theme",
-  ...props
-}: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  const [theme, setTheme] = useState<Theme>(STORAGE.THEME.get());
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -33,7 +27,7 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      STORAGE.THEME.set(theme);
       setTheme(theme);
     },
   };

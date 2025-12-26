@@ -7,9 +7,9 @@ export const GuessGrid = () => {
     <div className="flex flex-col gap-2 w-auto mx-auto">
       {guessResults.map((result, index) => {
         if (index === curAttempt) {
-          return <GuessRow guessData={curGuess} />;
+          return <GuessRow key={index} guessData={curGuess} />;
         }
-        return <GuessRow guessData={result || undefined} />;
+        return <GuessRow key={index} guessData={result || undefined} />;
       })}
     </div>
   );

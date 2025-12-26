@@ -1,41 +1,52 @@
+import { Button } from "@/components/ui/button";
 import { GameContext, initialState } from "@/lib/contexts/game/gameContext";
-import {
-  getWordAtIndex,
-  pickRandomIndex,
-  validateGuess,
-} from "@/lib/words/utils";
-import type { GameProviderPropTypes, GuessResult } from "@/types/game";
+import type {
+  GameProviderPropTypes,
+  GuessResult,
+  GuessValidationResult,
+} from "@/types/game";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export const GameProvider = ({
+  //TODO: implement games save
   storageKey: _storage = "wordle-game-results",
+  getRandomWord,
+  wordExists,
   children,
   ...props
 }: GameProviderPropTypes) => {
+  const [word, setWord] = useState(getRandomWord());
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [curAttempt, setCurAttempt] = useState(initialState.curAttempt);
-  const [wordIndex, setWordIndex] = useState(initialState.wordIndex);
   const [curGuess, setCurGuess] = useState<string[]>(initialState.curGuess);
   const [guessResults, setGuessResults] = useState<GuessResult[]>(
     initialState.guessResults
   );
 
   useEffect(() => {
-    const word = getWordAtIndex(wordIndex);
     if (gameOver) {
       console.log("Game Over!", { word });
     } else {
       //debug stuff
       console.log("current word", { word });
     }
-  }, [gameOver, wordIndex]);
+  }, [gameOver, word]);
+
+  const resetGame = () => {
+    setCurAttempt(initialState.curAttempt);
+    setCurGuess(initialState.curGuess);
+    setGuessResults(initialState.guessResults);
+    setWord(getRandomWord());
+    setGameOver(false);
+  };
 
   const saveGuess = () => {
-    if (gameOver) {
+    if (gameOver || curGuess.includes("")) {
       return;
     }
     try {
-      const guessResult = validateGuess(curGuess, wordIndex);
+      const guessResult = validateGuess();
       const wordWasGuessed = guessResult?.every((guess) => guess.isCorrect);
 
       const updatedResults = guessResults.map((result, index) => {
@@ -48,6 +59,7 @@ export const GameProvider = ({
 
       if (!updatedResults.includes(null) || wordWasGuessed) {
         console.log("end game");
+        console.log({ won: wordWasGuessed });
         setGameOver(true);
       }
     } catch (err) {
@@ -55,11 +67,20 @@ export const GameProvider = ({
     }
   };
 
-  const resetGame = () => {
-    setCurAttempt(initialState.curAttempt);
-    setWordIndex(pickRandomIndex());
-    setCurGuess(initialState.curGuess);
-    setGuessResults(initialState.guessResults);
+  const validateGuess = () => {
+    const guess = curGuess.join("");
+    if (!wordExists(guess)) {
+      const msg = `"${guess.toUpperCase()}" is not a valid word!`;
+      toast.error(msg);
+      throw new Error(msg);
+    }
+    return curGuess.map((letter: string, index: number) => {
+      return {
+        letter,
+        isCorrect: word.charAt(index) === letter,
+        hasLetter: word.includes(letter),
+      } as GuessValidationResult;
+    });
   };
 
   const addLetterToGuess = (letter: string) => {
@@ -94,17 +115,19 @@ export const GameProvider = ({
 
   const value = {
     curGuess,
-    wordIndex,
     guessResults,
     curAttempt,
     saveGuess,
     resetGame,
     addLetterToGuess,
     removeLetterFromGuess,
+    gameOver,
   };
+
   return (
     <GameContext.Provider {...props} value={value}>
       {children}
+      <Button onClick={resetGame}>Reset</Button>
     </GameContext.Provider>
   );
 };

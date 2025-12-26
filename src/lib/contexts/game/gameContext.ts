@@ -1,12 +1,12 @@
 import { createContext } from "react";
 import type { GameProviderState } from "@/types/game";
-import { pickRandomIndex } from "@/lib/words/utils";
+
+const { VITE_GUESS_ATTEMPTS, VITE_WORD_SIZE } = import.meta.env;
 
 export const initialState: GameProviderState = {
-  wordIndex: pickRandomIndex(),
   curAttempt: 0,
-  curGuess: Array(5).fill(""),
-  guessResults: Array(6).fill(null),
+  curGuess: Array(Number(VITE_WORD_SIZE)).fill(""),
+  guessResults: Array(Number(VITE_GUESS_ATTEMPTS)).fill(null),
   addLetterToGuess: () => {},
   removeLetterFromGuess: () => {},
   saveGuess: () => {},

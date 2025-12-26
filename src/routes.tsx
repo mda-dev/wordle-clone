@@ -1,8 +1,8 @@
 import { Landing } from "@/containers/Landing";
-import type { AppRoute } from "@/types/appRoutes";
+import type { AppRoute } from "@/types/route";
 import { GameContainer } from "@/containers/Game";
 
-export const AppRoutes: AppRoute[] = [
+export const APP_ROUTES: AppRoute[] = [
   {
     indexRoute: true,
     path: "/",

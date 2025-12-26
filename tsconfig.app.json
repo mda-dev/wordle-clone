@@ -16,7 +16,8 @@
     },
     "module": "ESNext",
     "types": [
-      "vite/client"
+      "vite/client",
+      "./src/types/vite"
     ],
     "skipLibCheck": true,
     /* Bundler mode */
