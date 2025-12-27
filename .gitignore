@@ -59,9 +59,3 @@ Thumbs.db
 # IDE and editor generated files
 .idea/
 *.sublime-*
-
-# Local environment files
-.env
-.env.local
-.env.*.local
-

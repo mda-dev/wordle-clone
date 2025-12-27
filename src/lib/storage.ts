@@ -1,16 +1,14 @@
+import { appConfig } from "@/config";
 import type { Theme } from "@/types/theme";
-
-const env = import.meta.env;
 
 const STORAGE = {
   THEME: {
     get: () => {
-      const theme =
-        localStorage.getItem(env.VITE_THEME_STORAGE_KEY) || "system";
+      const theme = localStorage.getItem(appConfig.storage.themeKey);
       return theme as Theme;
     },
     set: (mode: Theme) =>
-      localStorage.setItem(env.VITE_THEME_STORAGE_KEY, mode),
+      localStorage.setItem(appConfig.storage.themeKey, mode),
   },
 };
 

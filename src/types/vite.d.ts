@@ -11,6 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_GUESS_ATTEMPTS: number;
   readonly VITE_THEME_STORAGE_KEY: string;
   readonly VITE_GAME_STORAGE_KEY: string;
+  readonly VITE_GAME_LOCALE: string;
   readonly VITE_LOCALE_STORAGE_KEY: string;
 }
 

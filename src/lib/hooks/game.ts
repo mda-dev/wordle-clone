@@ -13,7 +13,7 @@ export const useGame = () => {
 };
 
 export const useWordlist = (wordListFileName?: string) => {
-  const fileName = wordListFileName || "ro-word-list-1.json";
+  const fileName = wordListFileName || "ro-word-list.json";
   return useQuery({
     queryKey: ["word-list"],
     queryFn: async (): Promise<string[]> => {

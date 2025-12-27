@@ -7,9 +7,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <title>Wordle Game</title>
+    <script>
+      (function () {
+        const theme = localStorage.getItem("wordle-ui-theme");
+        const elem = document.documentElement;
+        // Source - https://stackoverflow.com/a
+        // Posted by Mark Szabo, modified by community. See post 'Timeline' for change history
+        // Retrieved 2025-12-27, License - CC BY-SA 4.0
+        if (theme === "light" || theme === "dark") {
+          return elem.classList.add(theme);
+        }
+        const systemMode =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

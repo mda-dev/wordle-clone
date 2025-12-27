@@ -21,7 +21,7 @@ function App() {
                 <Link to="/" className="text-primary">
                   Wordle
                   <small className="text-xs text-chart-4 font-light justify-self-end translate-y-2">
-                    romania
+                    ro
                   </small>
                 </Link>
               </Button>
@@ -35,7 +35,7 @@ function App() {
           </WordListProvider>
         </ThemeProvider>
       </BrowserRouter>
-      <Toaster />
+      <Toaster className="bg-background" closeButton={true} />
     </div>
   );
 }

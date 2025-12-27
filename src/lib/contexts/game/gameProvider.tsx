@@ -70,8 +70,8 @@ export const GameProvider = ({
   const validateGuess = () => {
     const guess = curGuess.join("");
     if (!wordExists(guess)) {
-      const msg = `"${guess.toUpperCase()}" is not a valid word!`;
-      toast.error(msg);
+      const msg = `"${guess.toUpperCase()}" is not a valid word in the context of this game. Please try a different word`;
+      toast.error("Oopsie!", { description: msg });
       throw new Error(msg);
     }
     return curGuess.map((letter: string, index: number) => {

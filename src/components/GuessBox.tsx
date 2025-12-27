@@ -10,7 +10,8 @@ const boxVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-background ring-secondary itext-input-foreground",
+        default:
+          "bg-white dark:bg-background ring-secondary itext-input-foreground",
         missing: "bg-secondary/80 ring-secondary text-seconday-foreground",
         correct: "bg-chart-3/80 ring-chart-3 text-primary-foreground",
         partial: "bg-chart-4/80 ring-chart-4 text-primary-foreground",
