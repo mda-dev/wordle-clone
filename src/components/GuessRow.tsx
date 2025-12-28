@@ -11,7 +11,7 @@ interface GuessRowPropTypes {
 export const GuessRow = ({ guessData }: GuessRowPropTypes) => {
   const guessArray = guessData || emptyData;
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-4">
       {guessArray.map((data, index) => {
         if (typeof data === "string") {
           return <GuessBox key={index} letter={data} />;

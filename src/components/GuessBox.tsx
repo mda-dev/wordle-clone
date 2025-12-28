@@ -6,7 +6,7 @@ interface GuessBoxProps extends VariantProps<typeof boxVariants> {
 }
 
 const boxVariants = cva(
-  "flex w-14 h-14 text-3xl uppercase font-semibold items-center justify-center rounded-lg ring-1 shadow-md",
+  "absolute flex size-full text-3xl uppercase font-semibold items-center justify-center rounded-lg ring-1 shadow-md",
   {
     variants: {
       variant: {
@@ -24,7 +24,33 @@ const boxVariants = cva(
 );
 
 export const GuessBox = ({ letter, variant }: GuessBoxProps) => {
-  const classNames = cn(boxVariants({ variant }));
-
-  return <span className={classNames}>{letter}</span>;
+  const anim = letter ? "animate-insert repeat-1" : "repeat-0";
+  return (
+    <div
+      className={cn(
+        "box-container w-14 h-14 uppercase perspective-midrange",
+        anim
+      )}>
+      <div
+        className={cn(
+          variant && "transition duration-1000 transform-3d -rotate-x-180",
+          "relative size-full"
+        )}>
+        <span
+          className={cn(
+            boxVariants({ variant: "default" }),
+            "backface-hidden"
+          )}>
+          {letter}
+        </span>
+        <span
+          className={cn(
+            boxVariants({ variant }),
+            "backface-hidden -rotate-x-180"
+          )}>
+          {letter}
+        </span>
+      </div>
+    </div>
+  );
 };

@@ -137,7 +137,6 @@ export const GameProvider = ({
       {gameOver && (
         <ReactConfetti
           gravity={0.1}
-          height={658}
           initialVelocityX={2}
           initialVelocityY={2}
           numberOfPieces={200}
