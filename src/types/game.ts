@@ -14,9 +14,12 @@ export type GameProviderState = {
   curGuess: string[];
   guessResults: GuessResult[];
   gameOver: boolean;
+  gameWon: boolean;
   addLetterToGuess: (letter: string) => void;
   removeLetterFromGuess: () => void;
   saveGuess: () => void;
+  resetGame: () => void;
+  word: string;
 };
 
 export interface GameProviderPropTypes {

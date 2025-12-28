@@ -1,3 +1,4 @@
+import { GameEndDrawer } from "@/components/GameEndDrawer";
 import { GuessGrid } from "@/components/GuessGrid";
 import { KeyboardLayout } from "@/components/KeyboardLayout";
 import Loader from "@/components/Loader";
@@ -36,6 +37,7 @@ export const GameContainer = () => {
     <GameProvider getRandomWord={getRandomWord} wordExists={wordExists}>
       <GuessGrid />
       <KeyboardLayout />
+      <GameEndDrawer />
     </GameProvider>
   );
 };

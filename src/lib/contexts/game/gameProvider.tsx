@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
 import { GameContext, initialState } from "@/lib/contexts/game/gameContext";
 import type {
   GameProviderPropTypes,
   GuessResult,
   GuessValidationResult,
 } from "@/types/game";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
+import ReactConfetti from "react-confetti";
 
 export const GameProvider = ({
   //TODO: implement games save
@@ -20,6 +20,7 @@ export const GameProvider = ({
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [curAttempt, setCurAttempt] = useState(initialState.curAttempt);
   const [curGuess, setCurGuess] = useState<string[]>(initialState.curGuess);
+  const [gameWon, setGameWon] = useState<boolean>(false);
   const [guessResults, setGuessResults] = useState<GuessResult[]>(
     initialState.guessResults
   );
@@ -33,13 +34,13 @@ export const GameProvider = ({
     }
   }, [gameOver, word]);
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setCurAttempt(initialState.curAttempt);
     setCurGuess(initialState.curGuess);
     setGuessResults(initialState.guessResults);
     setWord(getRandomWord());
     setGameOver(false);
-  };
+  }, [getRandomWord]);
 
   const saveGuess = () => {
     if (gameOver || curGuess.includes("")) {
@@ -61,13 +62,14 @@ export const GameProvider = ({
         console.log("end game");
         console.log({ won: wordWasGuessed });
         setGameOver(true);
+        setGameWon(wordWasGuessed);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const validateGuess = () => {
+  const validateGuess = useCallback(() => {
     const guess = curGuess.join("");
     if (!wordExists(guess)) {
       const msg = `"${guess.toUpperCase()}" is not a valid word in the context of this game. Please try a different word`;
@@ -81,23 +83,26 @@ export const GameProvider = ({
         hasLetter: word.includes(letter),
       } as GuessValidationResult;
     });
-  };
+  }, [curGuess, word, wordExists]);
 
-  const addLetterToGuess = (letter: string) => {
-    if (gameOver) {
-      return;
-    }
-    const emptyIndex = curGuess.indexOf("");
-    if (emptyIndex === -1) {
-      return console.log("No more room ");
-    }
+  const addLetterToGuess = useCallback(
+    (letter: string) => {
+      if (gameOver) {
+        return;
+      }
+      const emptyIndex = curGuess.indexOf("");
+      if (emptyIndex === -1) {
+        return console.log("No more room ");
+      }
 
-    const updated = [...curGuess];
-    updated[emptyIndex] = letter;
-    setCurGuess(updated);
-  };
+      const updated = [...curGuess];
+      updated[emptyIndex] = letter;
+      setCurGuess(updated);
+    },
+    [curGuess, gameOver]
+  );
 
-  const removeLetterFromGuess = () => {
+  const removeLetterFromGuess = useCallback(() => {
     if (gameOver) {
       return;
     }
@@ -111,7 +116,7 @@ export const GameProvider = ({
     updated[prevIndex] = "";
 
     setCurGuess(updated);
-  };
+  }, [curGuess, gameOver]);
 
   const value = {
     curGuess,
@@ -122,12 +127,27 @@ export const GameProvider = ({
     addLetterToGuess,
     removeLetterFromGuess,
     gameOver,
+    gameWon,
+    word,
   };
 
   return (
     <GameContext.Provider {...props} value={value}>
       {children}
-      <Button onClick={resetGame}>Reset</Button>
+      {gameOver && (
+        <ReactConfetti
+          gravity={0.1}
+          height={658}
+          initialVelocityX={2}
+          initialVelocityY={2}
+          numberOfPieces={200}
+          opacity={1}
+          recycle
+          run={gameWon}
+          // width={1228}
+          wind={0}
+        />
+      )}
     </GameContext.Provider>
   );
 };

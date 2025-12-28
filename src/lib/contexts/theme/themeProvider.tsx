@@ -3,7 +3,7 @@ import type { Theme, ThemeProviderProps } from "@/types/theme";
 import { ThemeProviderContext } from "@/lib/contexts/theme/themeContext";
 import STORAGE from "@/lib/storage";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(STORAGE.THEME.get());
 
   useEffect(() => {
@@ -37,4 +37,4 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       {children}
     </ThemeProviderContext.Provider>
   );
-}
+};
