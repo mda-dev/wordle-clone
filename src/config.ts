@@ -5,6 +5,7 @@ const {
   VITE_GUESS_ATTEMPTS,
   VITE_LOCALE_STORAGE_KEY,
   VITE_GAME_LOCALE,
+  VITE_GAME_STORAGE_KEY,
 } = import.meta.env;
 
 export const appConfig = {
@@ -21,6 +22,7 @@ export const appConfig = {
   },
   storage: {
     themeKey: VITE_THEME_STORAGE_KEY || "ui-theme",
-    locale: VITE_LOCALE_STORAGE_KEY || "locale",
+    localeKey: VITE_LOCALE_STORAGE_KEY || "locale",
+    gameKey: VITE_GAME_STORAGE_KEY || "game",
   },
 } as const;

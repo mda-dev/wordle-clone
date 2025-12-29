@@ -4,7 +4,7 @@ import { GuessRow } from "./GuessRow";
 export const GuessGrid = () => {
   const { guessResults, curGuess, curAttempt } = useGame();
   return (
-    <div className="flex flex-col gap-4 w-auto mx-auto">
+    <div className="flex flex-col gap-4 w-auto mx-auto my-10">
       {guessResults.map((result, index) => {
         if (index === curAttempt) {
           return <GuessRow key={index} guessData={curGuess} />;

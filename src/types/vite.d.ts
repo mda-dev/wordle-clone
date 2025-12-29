@@ -13,6 +13,7 @@ interface ImportMetaEnv {
   readonly VITE_GAME_STORAGE_KEY: string;
   readonly VITE_GAME_LOCALE: string;
   readonly VITE_LOCALE_STORAGE_KEY: string;
+  readonly VITE_GAME_STORAGE_KEY: string;
 }
 
 interface ImportMeta {

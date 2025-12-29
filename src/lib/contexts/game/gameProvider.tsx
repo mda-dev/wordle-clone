@@ -7,10 +7,11 @@ import type {
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import ReactConfetti from "react-confetti";
+import { appConfig } from "@/config";
 
 export const GameProvider = ({
   //TODO: implement games save
-  storageKey: _storage = "wordle-game-results",
+  storageKey: _storage = appConfig.storage.gameKey,
   getRandomWord,
   wordExists,
   children,
@@ -72,8 +73,8 @@ export const GameProvider = ({
   const validateGuess = useCallback(() => {
     const guess = curGuess.join("");
     if (!wordExists(guess)) {
-      const msg = `"${guess.toUpperCase()}" is not a valid word in the context of this game. Please try a different word`;
-      toast.error("Oopsie!", { description: msg });
+      const msg = `${guess.toUpperCase()} is not in the word list`;
+      toast.info("Oopsie", { description: msg });
       throw new Error(msg);
     }
     return curGuess.map((letter: string, index: number) => {
