@@ -18,7 +18,7 @@ export const GameEndDrawer = () => {
       <DrawerContent>
         <div className="mx-auto w-full max-w-lg py-5">
           {gameWon ? <GameWonContent /> : <GameLostContent />}
-          <DrawerFooter>
+          <DrawerFooter autoFocus>
             <DrawerClose asChild>
               <Button size="lg" variant="default">
                 New Game

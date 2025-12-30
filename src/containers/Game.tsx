@@ -1,6 +1,6 @@
 import { GameEndDrawer } from "@/components/GameEndDrawer";
 import { GuessGrid } from "@/components/GuessGrid";
-import { KeyboardLayout } from "@/components/KeyboardLayout";
+import { VirtualKeyboard } from "@/components/VirtualKeyboard";
 import Loader from "@/components/Loader";
 import { GameProvider } from "@/lib/contexts/game/gameProvider";
 import { useWordlist } from "@/lib/hooks/game";
@@ -36,7 +36,7 @@ export const GameContainer = () => {
   return (
     <GameProvider getRandomWord={getRandomWord} wordExists={wordExists}>
       <GuessGrid />
-      <KeyboardLayout />
+      <VirtualKeyboard />
       <GameEndDrawer />
     </GameProvider>
   );

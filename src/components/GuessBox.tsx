@@ -33,8 +33,8 @@ export const GuessBox = ({ letter, variant }: GuessBoxProps) => {
       )}>
       <div
         className={cn(
-          variant && "transition duration-1000 transform-3d -rotate-x-180",
-          "relative size-full"
+          variant && "transform-3d -rotate-x-180",
+          "transition duration-1000 relative size-full"
         )}>
         <span
           className={cn(
