@@ -1,0 +1,23 @@
+{
+  "newGame": "New Game",
+  "newRound": "New Round",
+  "logoSubtext": "international",
+  "game": {
+    "errors": {
+      "wordNotFound": {
+        "title": "oopsie!",
+        "description": "The word {{word}} does not exist in current list."
+      }
+    },
+    "drawer": {
+      "win": {
+        "title": "Good Job!",
+        "subTitle": "You guessed the word \"{{word}}\" in {{attemptNr}} attempts."
+      },
+      "lose": {
+        "title": "Game over!",
+        "subTitle": "This round's word was \"{{word}}\" "
+      }
+    }
+  }
+}

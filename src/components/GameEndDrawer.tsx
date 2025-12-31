@@ -9,7 +9,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { useGame } from "@/lib/hooks/game";
-import { appConfig } from "@/config";
+import { useTranslation } from "react-i18next";
 export const GameEndDrawer = () => {
   const { gameOver, gameWon, resetGame } = useGame();
 
@@ -33,15 +33,15 @@ export const GameEndDrawer = () => {
 
 const GameWonContent = () => {
   const { word, curAttempt } = useGame();
+  const { t } = useTranslation();
   return (
     <DrawerHeader>
       <DrawerTitle className="text-3xl">Good Job!</DrawerTitle>
       <DrawerDescription className="text-lg py-7">
-        You guessed the word &quot;
-        <span className="text-chart-4 font-semibold uppercase"> {word} </span>
-        &quot; in{" "}
-        <span className="text-chart-3 font-semibold">{curAttempt}</span>{" "}
-        attempts.
+        {t("game.drawer.win.subTitle", {
+          word: word.toUpperCase(),
+          attemptNr: curAttempt,
+        })}
       </DrawerDescription>
     </DrawerHeader>
   );
@@ -49,17 +49,14 @@ const GameWonContent = () => {
 
 const GameLostContent = () => {
   const { word } = useGame();
+  const { t } = useTranslation();
   return (
     <DrawerHeader>
-      <DrawerTitle className="text-3xl">Game Over!</DrawerTitle>
+      <DrawerTitle className="text-3xl">
+        {t("game.drawer.lose.title")}
+      </DrawerTitle>
       <DrawerDescription className="text-lg py-7">
-        Sorry you couldn't guess the word &quot;
-        <span className="text-chart-4 font-semibold uppercase"> {word} </span>
-        &quot; in{" "}
-        <span className="text-destructive font-semibold">
-          {appConfig.game.maxAttempts}
-        </span>{" "}
-        attepts.
+        {t("game.drawer.lose.subTitle", { word: word.toLocaleUpperCase() })}
       </DrawerDescription>
     </DrawerHeader>
   );

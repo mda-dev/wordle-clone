@@ -1,0 +1,23 @@
+{
+  "newGame": "Joc Nou",
+  "newRound": "Rundă nouă",
+  "logoSubtext": "international",
+  "game": {
+    "errors": {
+      "wordNotFound": {
+        "title": "ups!",
+        "description": "Cuvântul {{word}} nu există în lista curentă de cuvinte."
+      }
+    },
+    "drawer": {
+      "win": {
+        "title": "Felicitări!",
+        "subTitle": "Ai ghicit cuvântul \"{{word}}\" în {{attemptNr}} încercări."
+      },
+      "lose": {
+        "title": "Joc încheiat!",
+        "subTitle": "Cuvântul din această rundă era \"{{word}}\" "
+      }
+    }
+  }
+}

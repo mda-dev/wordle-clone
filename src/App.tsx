@@ -5,8 +5,11 @@ import { APP_ROUTES } from "@/routes";
 import { Button } from "@/components/ui/button";
 import { WordListProvider } from "@/lib/contexts/game/wordListProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col gap-5 w-full max-w-7xl p-4 mx-auto">
       <BrowserRouter>
@@ -21,7 +24,7 @@ function App() {
                 <Link to="/" className="text-primary">
                   Wordle
                   <small className="text-xs text-chart-4 font-light justify-self-end translate-y-2">
-                    ro
+                    {t("logoSubtext")}
                   </small>
                 </Link>
               </Button>

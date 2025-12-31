@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import ReactConfetti from "react-confetti";
 import { appConfig } from "@/config";
+import { useTranslation } from "react-i18next";
 
 export const GameProvider = ({
   //TODO: implement games save
@@ -43,6 +44,8 @@ export const GameProvider = ({
     setGameOver(false);
   }, [getRandomWord]);
 
+  const { t } = useTranslation();
+
   const saveGuess = () => {
     if (gameOver || curGuess.includes("")) {
       return;
@@ -73,9 +76,12 @@ export const GameProvider = ({
   const validateGuess = useCallback(() => {
     const guess = curGuess.join("");
     if (!wordExists(guess)) {
-      const msg = `${guess.toUpperCase()} is not in the word list`;
-      toast.info("Oopsie", { description: msg });
-      throw new Error(msg);
+      toast.info(t("game.errors.wordNotFound.title"), {
+        description: t("game.errors.wordNotFound.description", {
+          word: guess.toUpperCase(),
+        }),
+      });
+      throw new Error("Word not found in list");
     }
     return curGuess.map((letter: string, index: number) => {
       return {
@@ -84,7 +90,7 @@ export const GameProvider = ({
         hasLetter: word.includes(letter),
       } as GuessValidationResult;
     });
-  }, [curGuess, word, wordExists]);
+  }, [curGuess, word, wordExists, t]);
 
   const addLetterToGuess = useCallback(
     (letter: string) => {
