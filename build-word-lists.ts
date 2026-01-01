@@ -26,7 +26,7 @@ const formatFile = async (fileName: string, locale?: string) => {
   try {
     const file = await fs.readFile(filePath, { encoding: "utf-8" });
     const wordArray: string[] = JSON.parse(file);
-    const processed = new Set(wordArray);
+    const processed = new Set(wordArray.map((item) => item.toUpperCase()));
 
     await saveWordList([...processed], saveName);
   } catch (error) {

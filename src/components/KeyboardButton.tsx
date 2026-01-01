@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-secondary hover:bg-secondary/80",
+        default: "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
         correct: "bg-chart-3/80 hover:bg-chart-3 text-background",
         partial: "bg-chart-4/80 hover:bg-chart-4 text-background",
       },
@@ -66,13 +66,15 @@ export const KeyboardButton = ({
           <PopoverTrigger asChild>
             <button className={buttonClassName}>{content}</button>
           </PopoverTrigger>
-          <PopoverContent side="top" className="flex w-auto p-3 gap-2">
+          <PopoverContent
+            side="top"
+            className="flex w-auto p-3 gap-2 ring-2 ring-primary bg-background">
             {value.map((letter) => (
               <PopoverClose key={letter} asChild>
                 <button
                   data-letter={letter}
                   onClick={handleClick}
-                  className="w-10 h-10 bg-background hover:bg-background/80 rounded outline-0 focus-visible:ring-2 ring-primary">
+                  className="w-10 h-10 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded outline-0 focus-visible:ring-2 ring-primary">
                   {letter}
                 </button>
               </PopoverClose>

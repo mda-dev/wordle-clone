@@ -3,13 +3,14 @@ import { initReactI18next } from "react-i18next";
 import HttpBackend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 
+console.log(import.meta.env.DEV);
 i18n
   .use(HttpBackend)
+
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    // lng: "ro-Ro",
-    fallbackLng: "en-US",
+    fallbackLng: "en",
     debug: import.meta.env.DEV,
     interpolation: {
       escapeValue: false,

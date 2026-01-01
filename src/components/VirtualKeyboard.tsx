@@ -27,7 +27,7 @@ export const VirtualKeyboard = () => {
         return removeLetterFromGuess();
       }
       if (keys.includes(value)) {
-        return addLetterToGuess(key);
+        return addLetterToGuess(value);
       }
     };
     document.addEventListener("keydown", kbrListener);

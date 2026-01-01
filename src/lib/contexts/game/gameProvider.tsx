@@ -28,13 +28,11 @@ export const GameProvider = ({
   );
 
   useEffect(() => {
-    if (gameOver) {
-      console.log("Game Over!", { word });
-    } else {
-      //debug stuff
-      console.log("current word", { word });
+    if (import.meta.env.PROD) {
+      return;
     }
-  }, [gameOver, word]);
+    console.log({ gameWon, gameOver, word });
+  }, [gameWon, gameOver, word]);
 
   const resetGame = useCallback(() => {
     setCurAttempt(initialState.curAttempt);
@@ -63,8 +61,6 @@ export const GameProvider = ({
       setCurAttempt(curAttempt + 1);
 
       if (!updatedResults.includes(null) || wordWasGuessed) {
-        console.log("end game");
-        console.log({ won: wordWasGuessed });
         setGameOver(true);
         setGameWon(wordWasGuessed);
       }
@@ -81,7 +77,7 @@ export const GameProvider = ({
           word: guess.toUpperCase(),
         }),
       });
-      throw new Error("Word not found in list");
+      throw new Error(`Word not found in list : ${guess}`);
     }
     return curGuess.map((letter: string, index: number) => {
       return {

@@ -1,7 +1,7 @@
 {
   "newGame": "New Game",
   "newRound": "New Round",
-  "logoSubtext": "international",
+  "logoSubtext": "infinite",
   "game": {
     "errors": {
       "wordNotFound": {
@@ -19,5 +19,15 @@
         "subTitle": "This round's word was \"{{word}}\" "
       }
     }
+  },
+  "cookiesDisclamer": {
+    "title": "Cookie/Storage notice",
+    "description1": "This website uses cookies and similar storage technologies",
+    "description2-1": "Essential cookies are required for the website to function correctly.",
+    "description2-2": "Analytics cookies help us understand how visitors use the website so we can improve its performance and usability.",
+
+    "description3": "We do not use cookies for advertising or cross-site tracking, and analytics data is not used to identify individual users.",
+    "core": "Core functionality",
+    "analytics": "Google Analytics"
   }
 }

@@ -12,16 +12,16 @@ import { useGame } from "@/lib/hooks/game";
 import { useTranslation } from "react-i18next";
 export const GameEndDrawer = () => {
   const { gameOver, gameWon, resetGame } = useGame();
-
+  const { t } = useTranslation();
   return (
     <Drawer open={gameOver} onClose={resetGame}>
       <DrawerContent>
-        <div className="mx-auto w-full max-w-lg py-5">
+        <div className="mx-auto w-full max-w-lg py-2">
           {gameWon ? <GameWonContent /> : <GameLostContent />}
           <DrawerFooter autoFocus>
             <DrawerClose asChild>
               <Button size="lg" variant="default">
-                New Game
+                {t("newRound")}
               </Button>
             </DrawerClose>
           </DrawerFooter>
@@ -36,10 +36,12 @@ const GameWonContent = () => {
   const { t } = useTranslation();
   return (
     <DrawerHeader>
-      <DrawerTitle className="text-3xl">Good Job!</DrawerTitle>
-      <DrawerDescription className="text-lg py-7">
+      <DrawerTitle className="text-3xl">
+        {t("game.drawer.win.title")}
+      </DrawerTitle>
+      <DrawerDescription className="text-lg py-2">
         {t("game.drawer.win.subTitle", {
-          word: word.toUpperCase(),
+          word: word,
           attemptNr: curAttempt,
         })}
       </DrawerDescription>
@@ -55,8 +57,8 @@ const GameLostContent = () => {
       <DrawerTitle className="text-3xl">
         {t("game.drawer.lose.title")}
       </DrawerTitle>
-      <DrawerDescription className="text-lg py-7">
-        {t("game.drawer.lose.subTitle", { word: word.toLocaleUpperCase() })}
+      <DrawerDescription className="text-lg py-2">
+        {t("game.drawer.lose.subTitle", { word: word })}
       </DrawerDescription>
     </DrawerHeader>
   );
